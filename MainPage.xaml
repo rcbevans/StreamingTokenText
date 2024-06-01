@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="StreamingTokenTest.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StreamingTokenTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:converters="using:CommunityToolkit.WinUI.Converters"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Name="BooleanToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <converters:BoolToObjectConverter x:Key="InverseBoolToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible"/>
+    </Page.Resources>
+
+    <StackPanel Orientation="Horizontal">
+        <Button x:Name="myButton" Command="{x:Bind ViewModel.GenerateOutputCommand, Mode=OneWay}">Generate</Button>
+        <Grid Visibility="{x:Bind ViewModel.ShowPlaceholder, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <TextBlock>Generating...</TextBlock>
+        </Grid>
+        <ScrollViewer Visibility="{x:Bind ViewModel.ShowPlaceholder, Converter={StaticResource InverseBoolToVisibilityConverter}}" HorizontalScrollMode="Auto" VerticalScrollMode="Auto">
+            <RichTextBlock>
+                <Paragraph>
+                    <Run Text="{x:Bind ViewModel.OutputText, Mode=OneWay}"/>
+                </Paragraph>
+            </RichTextBlock>
+        </ScrollViewer>
+    </StackPanel>
+</Page>

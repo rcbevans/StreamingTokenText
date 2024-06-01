@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "StreamingTokenTest (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "StreamingTokenTest (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
